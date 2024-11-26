@@ -27,6 +27,8 @@ public class Settings {
 
             ObjectMapper mapper = new XmlMapper();
 
+
+
             settings = mapper.readValue(settingsFile, this.getClass());
 
         } catch (Exception FileNotFoundException) {

@@ -1,4 +1,4 @@
-package Animal;
+package animal;
 
 abstract public class Animal {
 
