@@ -1,7 +1,7 @@
 
-˜	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™”ç„şÿÿÿÿ8Ù÷™òµ2J$81b9b80d-d832-41bb-be02-f7874ed93f41
 á
-java:S6548	"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ì½ğÿÿÿÿÿ8ë÷™òµ2J$4292b2f1-2eec-42f8-b168-691e7e49b0e9
-r	java:S106!"+Replace this use of System.out by a logger.(³‘ôğşÿÿÿÿ8ô÷™òµ2J$14ab9bfd-13f2-43cd-b0c7-98e2e8878c1f
-s
-java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8õ÷™òµ2J$6c45aa9d-d396-4d4f-b4b2-22461c1f72c6
+java:S6548
+"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ì½ğÿÿÿÿÿ8À·¼™·2J$488d3075-6f55-4c5f-8e00-1e9a056380bc
+m	java:S106%"+Replace this use of System.out by a logger.(ãŒå»8ÍÏÀ™·2J$0c9d526d-4fd6-4f73-b23a-a3cb68ebdb77
+r	java:S106)"+Replace this use of System.err by a logger.(ö©üÅùÿÿÿÿ8ÍÏÀ™·2J$2c479ae1-97b5-49e4-9d6a-a4420c446334
+r	java:S106+"+Replace this use of System.err by a logger.(Îêó‰ûÿÿÿÿ8ÎÏÀ™·2J$800c8133-115d-4e74-9623-c6d356712d27

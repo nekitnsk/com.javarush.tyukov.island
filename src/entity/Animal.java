@@ -1,4 +1,4 @@
-package animal;
+package entity;
 
 abstract public class Animal {
 

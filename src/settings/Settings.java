@@ -1,10 +1,11 @@
 package settings;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.yaml.snakeyaml.Yaml;
 
-import java.io.FileReader;
-import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Map;
 
 public class Settings {
 
@@ -20,19 +21,27 @@ public class Settings {
         return SettingsHolder.HOLDER_INSTANCE;
     }
 
-    public Settings getSettings() {
-
-        Settings settings = null;
-        try (FileReader settingsFile = new FileReader("settings.xml");) {
-
-            ObjectMapper mapper = new XmlMapper();
+    public Map<String, Object> getSettings() {
 
 
+        Map<String, Object> settings = null;
+        try (InputStream inputStream = new FileInputStream("src/settings/settings.yaml");) {
 
-            settings = mapper.readValue(settingsFile, this.getClass());
+            Yaml yaml = new Yaml();
 
-        } catch (Exception FileNotFoundException) {
-            System.out.println("Не найден файл с настройками");
+            settings = yaml.load(inputStream);
+
+            if (settings.containsKey("user")) {
+                Map<String, Object> userData = (Map<String, Object>) settings.get("user");
+                String userName = (String) userData.get("name");
+                System.out.println("Username: " + userName);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.err.println("Файл YAML не найден: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Ошибка при загрузке файла YAML: " + e.getMessage());
+            e.printStackTrace();
         }
 
 
