@@ -5,11 +5,16 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Settings {
 
+    public final Map<String, Object> SETTINGS;
+
     private Settings(){
+
+        SETTINGS = getsettings();
 
     }
 
@@ -21,7 +26,7 @@ public class Settings {
         return SettingsHolder.HOLDER_INSTANCE;
     }
 
-    public Map<String, Object> getSettings() {
+    public Map<String, Object> getsettings() {
 
 
         Map<String, Object> settings = null;
@@ -32,7 +37,7 @@ public class Settings {
             settings = yaml.load(inputStream);
 
             if (settings.containsKey("user")) {
-                Map<String, Object> userData = (Map<String, Object>) settings.get("user");
+                Map<String, Object> userData = (HashMap<String, Object>) settings.get("user");
                 String userName = (String) userData.get("name");
                 System.out.println("Username: " + userName);
             }

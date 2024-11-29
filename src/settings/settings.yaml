@@ -1,3 +1,6 @@
+sizeRow: 100
+sizeColumn: 20
+###############################
 probabilityOfEating:
   wolf:
     wolf: 0         #      Волк
