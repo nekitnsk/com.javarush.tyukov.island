@@ -15,9 +15,13 @@ public class Main {
 
         Island island = new Island((Integer) settings.SETTINGS.get("sizeRow"), (Integer) settings.SETTINGS.get("sizeColumn"));
 
-        AnimalFactory animalFactory = new AnimalFactory();
 
-//        System.out.println(Arrays.toString(island.getCells()));
 
+
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells[i].length; j++) {
+//                System.out.println(cells[i][j].getAnimals().toString());
+            }
+        }
     }
 }
