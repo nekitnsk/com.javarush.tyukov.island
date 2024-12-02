@@ -3,6 +3,7 @@ package app;
 import entity.animal.Animal;
 import entity.animal.AnimalFactory;
 import entity.animal.AnimalType;
+import island.Cell;
 import island.Island;
 import settings.Settings;
 
@@ -16,11 +17,11 @@ public class Main {
         Island island = new Island((Integer) settings.SETTINGS.get("sizeRow"), (Integer) settings.SETTINGS.get("sizeColumn"));
 
 
-
+        Cell[][] cells = island.getCells();
 
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
-//                System.out.println(cells[i][j].getAnimals().toString());
+//                System.out.println(cells[i][j].getPlants().size());
             }
         }
     }
