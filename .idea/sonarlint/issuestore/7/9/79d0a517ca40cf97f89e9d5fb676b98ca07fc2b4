@@ -1,3 +1,12 @@
 
-r	java:S106
-"+Replace this use of System.out by a logger.(ô¯ı‚ıÿÿÿÿ8ÄºÆ™·2J$5f2c792e-17f8-4c7f-b02b-bad53d4a0906
+k	java:S108")Either remove or fill this block of code.(Ï‘º8¹ß¾ú¸2J$f78262e9-2392-4953-95ab-3adaae3cb19b
+y
+java:S1128"1Remove this unused import 'entity.animal.Animal'.(ò­˜÷ıÿÿÿÿ8î¦İ“¹2J$652f011d-c5ed-4086-b59c-9870f7181610
+€
+java:S1128"8Remove this unused import 'entity.animal.AnimalFactory'.(ÆØ‘„úÿÿÿÿ8î¦İ“¹2J$9e53491c-c820-4a8e-9e85-cd1815ec6124
+}
+java:S1128"5Remove this unused import 'entity.animal.AnimalType'.(¸Óıöÿÿÿÿÿ8î¦İ“¹2J$c48ab128-382b-492a-8a19-1ee47164d8cd
+{
+java:S1128"8Remove this unused import 'entity.animal.predator.Wolf'.(çÚ±˜8î¦İ“¹2J$f8e0bf61-93b1-4edc-a738-b8d837921849
+u
+java:S1128"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ8î¦İ“¹2J$318a0590-f37b-4bd5-91b3-0a88f22f4bf0

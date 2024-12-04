@@ -1,7 +1,14 @@
 
+_
+java:S1700"Rename field "SETTINGS"(š˜òüÿÿÿÿ8ùÑÌƒ¹2J$de083962-f19d-4738-92f7-9ece5e6b6371
+™
+java:S22597"QA "NullPointerException" could be thrown; "probabilityOfEating" is nullable here.(‘î­´ıÿÿÿÿ8úÑÌƒ¹2J$556b7a1f-6caa-4ddc-a18b-fcdf0aae131e
+š	java:S116"SRename this field "SETTINGS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š˜òüÿÿÿÿ8ûÑÌƒ¹2J$29fdd71a-d290-4c39-b501-92b5d0ffea0c
 á
-java:S6548
-"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ì½ğÿÿÿÿÿ8À·¼™·2J$488d3075-6f55-4c5f-8e00-1e9a056380bc
-m	java:S106%"+Replace this use of System.out by a logger.(ãŒå»8ÍÏÀ™·2J$0c9d526d-4fd6-4f73-b23a-a3cb68ebdb77
-r	java:S106)"+Replace this use of System.err by a logger.(ö©üÅùÿÿÿÿ8ÍÏÀ™·2J$2c479ae1-97b5-49e4-9d6a-a4420c446334
-r	java:S106+"+Replace this use of System.err by a logger.(Îêó‰ûÿÿÿÿ8ÎÏÀ™·2J$800c8133-115d-4e74-9623-c6d356712d27
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ì½ğÿÿÿÿÿ8‚ÒÌƒ¹2J$55a4dfe7-aef9-4e9b-bcde-5bd2feb2f165
+r	java:S106("+Replace this use of System.err by a logger.(ö©üÅùÿÿÿÿ8ŠÒÌƒ¹2J$0d4789ea-5ae0-4bc2-ad6e-73147dc3d3d4
+r	java:S106*"+Replace this use of System.err by a logger.(Îêó‰ûÿÿÿÿ8ŒÒÌƒ¹2J$df1ab119-63c1-42a6-b9af-2aeb5ac398e2
+Š
+java:S1858J"G"type" is already a string, there's no need to call "toString()" on it.(ÿ•Äâ8›ÒÌƒ¹2J$3a95dabb-ce9f-4f0b-a72c-c80f5b74ca1e
+}
+java:S1128"5Remove this unused import 'entity.animal.AnimalType'.(¸Óıöÿÿÿÿÿ8íğÌƒ¹2J$96873c66-b6dc-4923-b43a-940c2fc251ad

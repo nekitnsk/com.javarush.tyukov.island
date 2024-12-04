@@ -9,21 +9,21 @@ public class AnimalFactory {
         Animal animal = null;
 
         animal = switch (type){
-            case WOLF -> new Wolf();
-            case BOA -> new Boa();
-            case FOX -> new Fox();
-            case BEAR -> new Bear();
-            case EAGLE -> new Eagle();
-            case HORSE -> new Horse();
-            case DEER -> new Deer();
-            case RABBIT -> new Rabbit();
-            case MOUSE -> new Mouse();
-            case GOAT -> new Goat();
-            case SHEEP -> new Sheep();
-            case BOAR -> new Boar();
-            case BUFFALO -> new Buffalo();
-            case DUCK -> new Duck();
-            case CATERPILLAR -> new Caterpillar();
+            case WOLF -> new Wolf(type);
+            case BOA -> new Boa(type);
+            case FOX -> new Fox(type);
+            case BEAR -> new Bear(type);
+            case EAGLE -> new Eagle(type);
+            case HORSE -> new Horse(type);
+            case DEER -> new Deer(type);
+            case RABBIT -> new Rabbit(type);
+            case MOUSE -> new Mouse(type);
+            case GOAT -> new Goat(type);
+            case SHEEP -> new Sheep(type);
+            case BOAR -> new Boar(type);
+            case BUFFALO -> new Buffalo(type);
+            case DUCK -> new Duck(type);
+            case CATERPILLAR -> new Caterpillar(type);
             default -> throw new IllegalArgumentException("Такого типа животного не существует: " + type);
         };
 

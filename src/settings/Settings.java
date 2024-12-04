@@ -46,6 +46,19 @@ public class Settings {
         return settings;
     }
 
+    public Map<String, Object> probabilityOfEating(String type){
+        Map<String, Object> probabilityOfEating = null;
+        Map<String, Object> probabilityOfType = null;
+        if (SETTINGS.containsKey("probabilityOfEating")) {
+            probabilityOfEating = (HashMap<String, Object>) SETTINGS.get("probabilityOfEating");
+        }
+        if(probabilityOfEating.containsKey(type)){
+            probabilityOfType = (HashMap<String, Object>) probabilityOfEating.get(type);
+        }
+
+        return probabilityOfType;
+    }
+
     public Map<String, Object> getEntitiesProperty() {
         Map<String, Object> entityProperty = null;
         if (SETTINGS.containsKey("entityProperty")) {
@@ -55,7 +68,7 @@ public class Settings {
         return entityProperty;
     }
 
-    public Map<String, Object> getAnimalProperty(AnimalType type) {
+    public Map<String, Object> getAnimalProperty(String type) {
         Map<String, Object> animalData = null;
         Map<String, Object> entityProperty = getEntitiesProperty();
         String typeStr = type.toString().toLowerCase();
