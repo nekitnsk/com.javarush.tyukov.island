@@ -155,7 +155,6 @@ abstract public class Animal extends Entity {
     public void reproduce(Cell currentCell){
         currentCell.getLock().lock();
 
-//        List<Animal> currentCellAnimals = currentCell.getAnimals();
         List<Animal> animalForReproduce = currentCell.getAnimals(animalType);
 
         if(animalForReproduce.size() > 1 && animalForReproduce.size() < maxPopulation){
@@ -170,6 +169,7 @@ abstract public class Animal extends Entity {
         if(speed == 0 ) return;
 
         currentCell.getLock().lock();
+
         int populationInCell = currentCell.getAnimals(this.animalType).size();
         int column = currentCell.getMyColumn();
         int row = currentCell.getMyRow();
@@ -216,6 +216,7 @@ abstract public class Animal extends Entity {
         }
 
         Cell destCell = cells[newRow][newColumn];
+
         if(destCell.getAnimals(this.animalType).size() < populationInCell) {
             destCell.getLock().lock();
             if(destCell.getAnimals().add(this)) {
@@ -223,7 +224,6 @@ abstract public class Animal extends Entity {
             }
             destCell.getLock().unlock();
         }
-
 
         currentCell.getLock().unlock();
     }

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class Cell {
 
-    private final int PERCENT_FILL = 30;
+    private final int PERCENT_FILL = 33;
 
     private List<Plant> plants = new CopyOnWriteArrayList<>();
     public List<Animal> animals = new CopyOnWriteArrayList<>();

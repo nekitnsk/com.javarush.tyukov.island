@@ -1,10 +1,5 @@
 package app;
 
-import entity.animal.Animal;
-import entity.animal.AnimalFactory;
-import entity.animal.AnimalType;
-import entity.animal.predator.Wolf;
-import island.Cell;
 import island.Island;
 import settings.Settings;
 import worker.IslandWorker;

@@ -50,20 +50,6 @@ public class IslandWorker extends Thread{
         entityByTypesWorkers.forEach(executorService::submit);
 
         executorService.shutdown();
-
-//        afterExecutorService(executorService);
-
     }
 
-    public void afterExecutorService(ExecutorService executorService){
-        try {
-            if (executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS)) {
-                View view = new View(island);
-
-                view.showStatistics();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

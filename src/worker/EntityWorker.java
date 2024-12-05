@@ -47,7 +47,7 @@ public class EntityWorker implements Runnable{
         cell.getLock().lock();
         try{
             animals.forEach(animal -> {
-                tasks.add(new Task(island, (Animal) animal, cell));
+                tasks.add(new Task(island, animal, cell));
             });
             plants.forEach(plant -> tasksPlant.add(new TaskPlant(cell)));
         }finally {
