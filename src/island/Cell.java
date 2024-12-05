@@ -18,7 +18,7 @@ public class Cell {
     private final int PERCENT_FILL = 30;
 
     private List<Plant> plants = new CopyOnWriteArrayList<>();
-    private List<Animal> animals = new CopyOnWriteArrayList<>();
+    public List<Animal> animals = new CopyOnWriteArrayList<>();
     private int myColumn;
     private int myRow;
 

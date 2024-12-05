@@ -1,5 +1,5 @@
-sizeRow: 100
-sizeColumn: 20
+sizeRow: 10
+sizeColumn: 10
 ###############################
 probabilityOfEating:
   wolf:

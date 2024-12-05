@@ -1,6 +1,7 @@
 package worker;
 
 import entity.Entity;
+import entity.Plant;
 import entity.animal.Animal;
 import entity.animal.AnimalType;
 import island.Cell;
@@ -21,6 +22,7 @@ public class EntityWorker implements Runnable{
     }
 
     private final Queue<Task> tasks = new ConcurrentLinkedQueue<>();
+    private final Queue<TaskPlant> tasksPlant = new ConcurrentLinkedQueue<>();
 
     @Override
     public void run() {
@@ -39,19 +41,23 @@ public class EntityWorker implements Runnable{
     }
 
     private void processInOneCell(Cell cell){
-        List<? extends Entity> animals = cell.getAnimals(type);
+        List<Animal> animals = cell.getAnimals(type);
+        List<Plant> plants = cell.getPlants();
 
         cell.getLock().lock();
         try{
             animals.forEach(animal -> {
                 tasks.add(new Task(island, (Animal) animal, cell));
             });
+            plants.forEach(plant -> tasksPlant.add(new TaskPlant(cell)));
         }finally {
             cell.getLock().unlock();
         }
 
         tasks.forEach(Task::doTask);
+        tasksPlant.forEach(TaskPlant::doTask);
         tasks.clear();
+        tasksPlant.clear();
 
     }
 

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class IslandWorker extends Thread{
 
     public static final int CORE_SIZE = 4;
-    private static final int PERIOD = 100;
+    private static final int PERIOD = 1000;
     private Island island;
 
     public IslandWorker(Island island){
@@ -27,6 +27,10 @@ public class IslandWorker extends Thread{
     public void run() {
 
         ScheduledExecutorService pool = Executors.newScheduledThreadPool(CORE_SIZE);
+        ScheduledExecutorService showStatistics = Executors.newScheduledThreadPool(CORE_SIZE);
+
+        View view = new View(island);
+        showStatistics.scheduleAtFixedRate(view, 1000, 1000, TimeUnit.MILLISECONDS);
 
         List<EntityWorker> entityByTypesWorkers = new ArrayList<>();
 
@@ -47,7 +51,7 @@ public class IslandWorker extends Thread{
 
         executorService.shutdown();
 
-        afterExecutorService(executorService);
+//        afterExecutorService(executorService);
 
     }
 

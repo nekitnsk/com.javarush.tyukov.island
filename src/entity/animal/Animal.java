@@ -20,6 +20,7 @@ abstract public class Animal extends Entity {
     private Double food;
     private Integer speed;
     public AnimalType animalType;
+    public Boolean isAvailable = true;
     Settings settings = Settings.getInstance();
 
     public Animal(AnimalType type){
@@ -39,18 +40,23 @@ abstract public class Animal extends Entity {
 
     public Boolean eat(Cell currentCell){
         currentCell.getLock().lock();
+        isAvailable = false;
         Map<String, Object> probabilityOfEating = settings.probabilityOfEating(this.animalType.toString().toLowerCase());
 
         Map<String, Object> animalCanEat = probabilityOfEating
                 .entrySet()
                 .stream()
-                .filter(entry -> (Integer) entry.getValue() > 0)
+                .filter(animal -> (Integer) animal.getValue() > 0)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        List<Animal> currentCellAnimals = currentCell.getAnimals();
+        List<Animal> currentCellAnimals = currentCell
+                .getAnimals()
+                .stream()
+                .filter(animal -> animal.isAvailable)
+                .toList();
         List<Animal> currentCellAnimalsCanEat = currentCellAnimals
                 .stream()
-                .filter(entry -> animalCanEat.containsKey(entry.animalType.toString().toLowerCase()))
+                .filter(animal -> animalCanEat.containsKey(animal.animalType.toString().toLowerCase()))
                 .toList();
 
 
@@ -120,7 +126,7 @@ abstract public class Animal extends Entity {
                 dieAnimal(currentCell);
             }
         }
-
+        isAvailable = true;
         currentCell.getLock().unlock();
         return true;
     }
@@ -153,13 +159,8 @@ abstract public class Animal extends Entity {
         List<Animal> animalForReproduce = currentCell.getAnimals(animalType);
 
         if(animalForReproduce.size() > 1 && animalForReproduce.size() < maxPopulation){
-            int pair = animalForReproduce.size() / 2;
 
-            int needCount = Math.min(animalForReproduce.size() - maxPopulation, pair);
-
-            for (int i = 0; i < needCount; i++) {
                 currentCell.addNewAnimal(animalType);
-            }
         }
 
         currentCell.getLock().unlock();
@@ -217,11 +218,13 @@ abstract public class Animal extends Entity {
         Cell destCell = cells[newRow][newColumn];
         if(destCell.getAnimals(this.animalType).size() < populationInCell) {
             destCell.getLock().lock();
-            destCell.getAnimals().add(this);
+            if(destCell.getAnimals().add(this)) {
+                currentCell.getAnimals().remove(this);
+            }
             destCell.getLock().unlock();
         }
 
-        currentCell.getAnimals().remove(this);
+
         currentCell.getLock().unlock();
     }
 

@@ -18,13 +18,11 @@ public class Task {
     }
 
     public void doTask(){
+
         if(animal.eat(cell)){
             animal.reproduce(cell);
         }
         animal.move(island, cell);
-
-        Plant.spawn(cell);
-
 
     }
 }
