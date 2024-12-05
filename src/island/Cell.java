@@ -15,14 +15,19 @@ import java.util.stream.Collectors;
 
 public class Cell {
 
-    private final int PERCENT_FILL = 33;
+    private final int PERCENT_FILL = 30;
 
     private List<Plant> plants = new CopyOnWriteArrayList<>();
     private List<Animal> animals = new CopyOnWriteArrayList<>();
+    private int myColumn;
+    private int myRow;
+
 
     private final Lock lock = new ReentrantLock(true);
 
-    public Cell() {
+    public Cell(int row, int column) {
+        this.myRow = row;
+        this.myColumn = column;
         Settings settings = Settings.getInstance();
 
         AnimalType[] values = AnimalType.values();
@@ -55,12 +60,19 @@ public class Cell {
 
     public List<Animal> getAnimals(AnimalType animalType) {
 
-        List<Animal> animalListByType = getAnimals().stream()
+        List<Animal> animalListByType = getAnimals()
+                .stream()
                 .filter(animal -> animal.animalType.equals(animalType))
                 .collect(Collectors.toList());
 
         return animalListByType;
     }
+
+    public void addNewAnimal(AnimalType type){
+        AnimalFactory animalFactory = new AnimalFactory();
+        animals.add(animalFactory.getAnimal(type));
+    }
+
 
     public List<Plant> getPlants() {
         return plants;
@@ -68,5 +80,13 @@ public class Cell {
 
     public void setPlants(List<Plant> plants) {
         this.plants = plants;
+    }
+
+    public int getMyColumn() {
+        return myColumn;
+    }
+
+    public int getMyRow() {
+        return myRow;
     }
 }

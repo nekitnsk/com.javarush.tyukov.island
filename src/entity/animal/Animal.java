@@ -4,6 +4,7 @@ package entity.animal;
 import entity.Entity;
 import entity.Plant;
 import island.Cell;
+import island.Island;
 import settings.Settings;
 
 import java.util.List;
@@ -15,9 +16,9 @@ abstract public class Animal extends Entity {
 
     private Double weight;
     private Double maxWeight;
-    public Double satiety;
-    public Double food;
-    public Integer speed;
+    private Integer maxPopulation;
+    private Double food;
+    private Integer speed;
     public AnimalType animalType;
     Settings settings = Settings.getInstance();
 
@@ -26,7 +27,7 @@ abstract public class Animal extends Entity {
         Map<String, Object> animalProperty = settings.getAnimalProperty(this.getClass().getSimpleName().toString());
         this.weight = Double.parseDouble(animalProperty.get("weight").toString()) / 2;
         this.maxWeight = Double.parseDouble(animalProperty.get("weight").toString());
-        this.satiety = 50.0D;
+        this.maxPopulation = Integer.valueOf(animalProperty.get("maxPopulation").toString());
         this.food = Double.parseDouble(animalProperty.get("food").toString());
         if(animalProperty.get("speed") != null) {
             this.speed = Integer.valueOf(animalProperty.get("speed").toString());
@@ -51,6 +52,8 @@ abstract public class Animal extends Entity {
                 .stream()
                 .filter(entry -> animalCanEat.containsKey(entry.animalType.toString().toLowerCase()))
                 .toList();
+
+
 
         List<Plant> currentCellPlantsCanEat = List.of();
         if(animalCanEat.containsKey("plants")) {
@@ -87,6 +90,7 @@ abstract public class Animal extends Entity {
                     victim.dieAnimal(currentCell);
 
                 }else{
+
                     plant = currentCellPlantsCanEat.get(rndIndex - currentCellAnimalsCanEat.size());
                     foodWeight = plant.getWeight();
 
@@ -140,6 +144,87 @@ abstract public class Animal extends Entity {
         }
     }
 
+
+
+    public void reproduce(Cell currentCell){
+        currentCell.getLock().lock();
+
+//        List<Animal> currentCellAnimals = currentCell.getAnimals();
+        List<Animal> animalForReproduce = currentCell.getAnimals(animalType);
+
+        if(animalForReproduce.size() > 1 && animalForReproduce.size() < maxPopulation){
+            int pair = animalForReproduce.size() / 2;
+
+            int needCount = Math.min(animalForReproduce.size() - maxPopulation, pair);
+
+            for (int i = 0; i < needCount; i++) {
+                currentCell.addNewAnimal(animalType);
+            }
+        }
+
+        currentCell.getLock().unlock();
+    }
+
+    public void move(Island island, Cell currentCell){
+        if(speed == 0 ) return;
+
+        currentCell.getLock().lock();
+        int populationInCell = currentCell.getAnimals(this.animalType).size();
+        int column = currentCell.getMyColumn();
+        int row = currentCell.getMyRow();
+        Cell[][] cells = island.getCells();
+
+        int maxRow = cells.length-1;
+        int maxColumn = cells[maxRow].length-1;
+
+        int newColumn = 0;
+        int newRow = 0;
+
+        int rnd = ThreadLocalRandom.current().nextInt(0, 3); //0 - up, 1 - down, 2 - left, 3- right
+
+        switch (rnd){
+            case 0: {
+                newColumn = column - speed;
+                if(newColumn < 0){
+                    newColumn = 0;
+                }
+                newRow = row;
+            }
+            case 1: {
+                newColumn = column + speed;
+                if(newColumn > maxColumn){
+                    newColumn = maxColumn;
+                }
+                newRow = row;
+            }
+            case 2: {
+                newRow = row - speed;
+                if(newRow < 0){
+                    newRow = 0;
+                }
+                newColumn = column;
+            }
+            case 3: {
+                newRow = row + speed;
+                if(newRow > maxRow){
+                    newRow = maxRow;
+                }
+                newColumn = column;
+
+            }
+        }
+
+        Cell destCell = cells[newRow][newColumn];
+        if(destCell.getAnimals(this.animalType).size() < populationInCell) {
+            destCell.getLock().lock();
+            destCell.getAnimals().add(this);
+            destCell.getLock().unlock();
+        }
+
+        currentCell.getAnimals().remove(this);
+        currentCell.getLock().unlock();
+    }
+
     public Double getWeight() {
         return weight;
     }
@@ -158,14 +243,6 @@ abstract public class Animal extends Entity {
 
     public Animal(Double maxWeight) {
         this.maxWeight = maxWeight;
-    }
-
-    public void reproduce(Cell currentCell){
-
-
-    }
-
-    public void move(Cell currentCell){
     }
 
 }

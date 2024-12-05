@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class IslandWorker extends Thread{
 
     public static final int CORE_SIZE = 4;
-    private static final int PERIOD = 1000;
+    private static final int PERIOD = 100;
     private Island island;
 
     public IslandWorker(Island island){
@@ -35,9 +35,6 @@ public class IslandWorker extends Thread{
         for (AnimalType animalType : animalTypeList) {
             entityByTypesWorkers.add(new EntityWorker(island, animalType));
         }
-
-        System.out.println(entityByTypesWorkers);
-
 
         pool.scheduleWithFixedDelay(() -> worker(island, entityByTypesWorkers), PERIOD, PERIOD, TimeUnit.MILLISECONDS);
 

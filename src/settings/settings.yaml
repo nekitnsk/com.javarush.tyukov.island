@@ -1,4 +1,4 @@
-sizeRow: 20
+sizeRow: 100
 sizeColumn: 20
 ###############################
 probabilityOfEating:
@@ -332,7 +332,7 @@ entityProperty:
   caterpillar:
     weight: 0.01
     maxPopulation: 1000
-    speed:
+    speed: 0
     food: 0
   plant:
     weight: 1
